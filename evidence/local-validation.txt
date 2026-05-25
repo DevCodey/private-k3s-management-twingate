@@ -1,0 +1,70 @@
+# Local Validation Evidence
+
+Captured at UTC:
+Mon May 25 05:23:29 PM UTC 2026
+
+## Hostname
+k3s-demo
+
+## Current User
+k3-demo
+
+## Network Interfaces
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens18            UP             192.168.1.168/24 2600:4040:7dc6:5300:be24:11ff:febc:35c9/64 fe80::be24:11ff:febc:35c9/64 
+flannel.1        UNKNOWN        10.42.0.0/32 fe80::a055:55ff:fe24:cd38/64 
+cni0             UP             10.42.0.1/24 fe80::20c1:beff:fe06:f03a/64 
+vethd3e6ffe3@if2 UP             fe80::f03e:57ff:fefd:50d3/64 
+veth304b6d18@if2 UP             fe80::3c3c:47ff:fe03:6e7f/64 
+vethecf698f3@if2 UP             fe80::e6:48ff:fee2:b7ba/64 
+veth296d1de5@if2 UP             fe80::c487:a2ff:fe0e:4d60/64 
+veth0efaf4b2@if2 UP             fe80::7838:e7ff:fe49:b320/64 
+vethdd20ae4d@if2 UP             fe80::34b6:36ff:fea5:2c92/64 
+vethf44e90c0@if2 UP             fe80::bc25:42ff:fec5:5f64/64 
+vethc0ca7d02@if2 UP             fe80::9c32:33ff:fedf:8444/64 
+vethc3410d5f@if2 UP             fe80::387a:67ff:fea8:fafd/64 
+
+## Default Route
+default via 192.168.1.1 dev ens18 proto dhcp src 192.168.1.168 metric 100 
+
+## SSH Listener
+LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*    users:(("sshd",pid=1952,fd=3),("systemd",pid=1,fd=91))
+LISTEN 0      4096            [::]:22            [::]:*    users:(("sshd",pid=1952,fd=4),("systemd",pid=1,fd=92))
+
+## SSH Service Status
+active
+
+## K3s Service Status
+active
+
+## Twingate Connector Health
+OK
+
+## Twingate Services
+  twingate-connector.service               loaded active running Twingate Connector service
+
+## Kubernetes Nodes
+NAME       STATUS   ROLES           AGE    VERSION        INTERNAL-IP     EXTERNAL-IP   OS-IMAGE           KERNEL-VERSION     CONTAINER-RUNTIME
+k3s-demo   Ready    control-plane   7h4m   v1.35.5+k3s1   192.168.1.168   <none>        Ubuntu 26.04 LTS   7.0.0-15-generic   containerd://2.2.3-k3s1
+
+## Demo Pods
+NAME                      READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+whoami-56759f85b8-lnj8c   1/1     Running   0          81m   10.42.0.18   k3s-demo   <none>           <none>
+whoami-56759f85b8-pt22s   1/1     Running   0          81m   10.42.0.19   k3s-demo   <none>           <none>
+
+## Demo Service
+NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+whoami-nodeport   NodePort   10.43.163.202   <none>        80:30080/TCP   81m   app=whoami
+
+## Local HTTP Test
+Hostname: whoami-56759f85b8-pt22s
+IP: 127.0.0.1
+IP: ::1
+IP: 10.42.0.19
+IP: fe80::f039:19ff:fe0b:de73
+RemoteAddr: 10.42.0.1:59221
+GET / HTTP/1.1
+Host: 192.168.1.168:30080
+User-Agent: curl/8.18.0
+Accept: */*
+
